@@ -1,0 +1,8 @@
+
+select weather as conditions
+    ,count(*) as num_trips
+from VINAY_BIKE_PRATICE.public.Vinay_trips 
+left outer join json_weather_data_view
+    on date_trunc('hour', observation_time) = date_trunc('hour', starttime)
+where conditions is not null
+group by 1 order by 2 desc;
